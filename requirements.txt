@@ -1,0 +1,31 @@
+# EduPulse Complete - All Dependencies
+# Install with: pip install -r requirements.txt
+
+# Core LangChain
+langchain==0.3.15
+langchain-core==0.3.25
+langchain-community==0.3.15
+langchain-ollama==0.2.2
+
+# Search APIs
+tavily-python==0.5.0              # For the Advanced Search (Tavily)
+langchain-tavily==0.2.0           # LangChain Tavily integration
+
+# Web Scraping (for Basic Search)
+beautifulsoup4==4.12.3
+requests==2.32.3
+lxml==5.3.0
+
+# PDF Generation (REQUIRED for PDF output)
+reportlab==4.2.5
+
+# UI Framework
+streamlit==1.40.0
+
+# Utilities
+python-dotenv==1.0.1
+loguru==0.7.3
+pydantic==2.10.5
+
+# Optional but useful
+urllib3==2.2.1
