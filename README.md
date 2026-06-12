@@ -1,15 +1,45 @@
-# 🎓 EduPulse - Final Fixed Version
+# 🎓 EduPulse - latest Version
 
-## ✅ All 5 Issues Fixed!
+# 🎓 EduPulse - System Overview
 
-This version addresses every problem you reported:
-1. ✅ Tavily search working properly
-2. ✅ UI choice between Basic and Advanced search
-3. ✅ PDF generation fixed
-4. ✅ Quiz buttons work without redirect
-5. ✅ Corrected model speed advice
+## What EduPulse Does
+
+**EduPulse** is an autonomous AI-powered learning curriculum architect that transforms any learning goal into a structured 5-day educational plan with modules, resources, and interactive quizzes.
+
+### Core Functionality:
+1. **Takes a learning topic** from the user (e.g., "Python programming", "Circuit repair basics")
+2. **Generates a 10-day curriculum** with structured modules
+3. **Finds real educational resources** for each module (videos, documentation, tutorials)
+4. **Creates assessment quizzes** for knowledge verification
+5. **Exports as PDF** for offline access or printing
 
 ---
+
+## System Architecture
+
+### Multi-Agent System
+EduPulse uses **3 specialized AI agents** working together:
+
+#### 1. **Syllabus Architect Agent**
+- **Role**: Curriculum designer
+- **Task**: Breaks down any topic into 10 logical learning modules
+- **Output**: Structured syllabus with learning objectives for each module
+- **Example**: "Python Programming" → [Basics, Functions, OOP, Web Dev, Projects]
+
+#### 2. **Resource Scout Agent**
+- **Role**: Educational content finder
+- **Task**: Searches for high-quality learning resources (videos, docs, tutorials, GitHub repos)
+- **Methods**: 
+  - **Basic Search**: Uses BeautifulSoup web scraping (free, no API key)
+  - **Advanced Search**: Uses Tavily AI search (better quality, requires free API key)
+- **Output**: Curated list of educational resources per module
+
+#### 3. **Assessment Officer Agent**
+- **Role**: Educational assessment creator
+- **Task**: Generates quiz questions for each module to test knowledge
+- **Output**: Multiple-choice questions with explanations
+
+### Workflow Pipeline
 
 ## 🚀 Quick Start (3 Commands)
 
@@ -30,10 +60,9 @@ streamlit run ui.py
 
 ## 🔧 What's Fixed
 
-### Issue 1: Tavily Search ✅
-**Problem:** API key in wrong file (.env.template), not using LangChain properly
-**Fix:**
-- Created actual `.env` file (not template!)
+### 1: Tavily Search ✅
+
+- Created `.env` file
 - Implemented `TavilySearchResults` from LangChain
 - Added UI input for API key
 - Proper error handling and logging
@@ -47,11 +76,10 @@ tavily_search = TavilySearchResults(max_results=5, search_depth="advanced")
 results = tavily_search.invoke(query)
 ```
 
-### Issue 2: Search Method Choice ✅
-**Problem:** No option to choose search method
-**Fix:**
+### 2: Search Method Choice ✅
+
 - Added radio button in sidebar
-- "Basic Search (Free)" - BeautifulSoup, no key needed
+- "Basic Search (Free)" - BeautifulSoup, no API key needed
 - "Advanced Search (Tavily)" - Tavily API, better quality
 - API key input appears when Tavily selected
 - Tavily signup link provided
@@ -63,37 +91,15 @@ results = tavily_search.invoke(query)
 - Info expandables explaining each method
 - Model recommendations per search type
 
-### Issue 3: PDF Generation ✅
-**Problem:** PDF fails for some models, crashes on search errors
-**Fix:**
+### 3: PDF Generation ✅
+
 - Comprehensive error handling
 - Safe markdown-to-text conversion
 - Graceful fallbacks when resources unavailable
 - Character escaping for PDF compatibility
 - Always generates PDF even if search fails
 
-**Now works for ALL models!**
 
-### Issue 4: Quiz Button Redirects ✅
-**Problem:** "Check Answer" buttons redirect to main page
-**Fix:**
-- Globally unique question IDs: `f"module_{i}_q_{j}"`
-- Separate session state for checked answers
-- Proper initialization
-- Disabled button when no answer selected
-- State persists across ALL interactions
-
-**Buttons work perfectly now!**
-
-### Issue 5: Model Speed Advice ✅
-**Problem:** Wrong claim that small models = fast, large = slow
-**Fix:**
-- Corrected guidance based on your testing
-- Explains architecture matters more than size
-- Notes deepseek-v3.1:671b can be faster than smaller models
-- Recommends testing to find sweet spot
-
-**Accurate information now!**
 
 ---
 
@@ -101,15 +107,14 @@ results = tavily_search.invoke(query)
 
 ```
 edupulse_final/
-├── agents.py           # ✅ Fixed Tavily integration
-├── main.py             # ✅ Fixed PDF generation
-├── ui.py               # ✅ Search choice + button fix
-├── tools.py            # Unchanged
-├── utils.py            # Unchanged
-├── requirements.txt    # ✅ All deps including Tavily
-├── .env                # ✅ Actual config file!
-├── README.md           # This file
-└── ALL_5_FIXES_EXPLAINED.md  # Detailed explanations
+├── agents.py           
+├── main.py             
+├── ui.py               
+├── tools.py            
+├── utils.py            
+├── requirements.txt    
+├── .env                
+└── README.md           
 ```
 
 ---
@@ -180,11 +185,6 @@ TAVILY_API_KEY=tvly-your-actual-key-here
 
 ### Speed vs. Quality (Corrected!)
 
-**Your Testing Revealed:**
-- deepseek-v3.1:671b-cloud → Fast + High quality ⭐
-- qwen3.5:cloud → Slower + High quality ⭐
-- qwen2.5:7b → Fast + Lower quality ⚠️
-
 **Key Insight:** Size ≠ Speed!
 
 **What Actually Matters:**
@@ -200,60 +200,17 @@ TAVILY_API_KEY=tvly-your-actual-key-here
 
 ### Model List (Your Choices)
 ```
-qwen3.5:397b-cloud           (High quality)
-deepseek-v3.1:671b-cloud     (Fast + High quality ⭐)
-deepseek-v3.2:cloud          (High quality)
-qwen3.5:cloud                (High quality)
-gpt-oss:120b-cloud           (Good balance)
-nemotron-3-super:cloud       (Good quality)
-glm-5:cloud                  (Good quality)
-kimi-k2.5:cloud              (Good quality)
-gpt-oss:20b-cloud            (Faster, lower quality)
-qwen2.5:7b                   (Fastest, lowest quality)
-openvoid/Void-Gemini:latest  (Experimental)
+  qwen3.5:397b-cloud
+  qwen3-coder-next:cloud
+  qwen3.5:cloud",
+  gpt-oss:120b-cloud
+  gpt-oss:20b-cloud
+  nemotron-3-super:cloud
+  nemotron-3-ultra:cloud
+  minimax-m3:cloud
+  minimax-m2.5:cloud
+  gemma4:31b-cloud
 ```
-
----
-
-## 🧪 Testing Checklist
-
-### Test 1: Basic Search (Free)
-- [ ] Select "Basic Search (Free)"
-- [ ] Generate curriculum
-- [ ] Should work without API key
-- [ ] Resources may be lower quality
-
-### Test 2: Advanced Search (Tavily)
-- [ ] Get Tavily API key
-- [ ] Select "Advanced Search (Tavily)"
-- [ ] Enter key in sidebar
-- [ ] Generate curriculum
-- [ ] Resources should be high quality URLs
-
-### Test 3: PDF Generation
-- [ ] Generate curriculum (either search method)
-- [ ] Check output/ folder
-- [ ] PDF file should exist
-- [ ] Open PDF - should be readable
-- [ ] Works even if some resources missing
-
-### Test 4: Quiz Buttons
-- [ ] Generate curriculum
-- [ ] Go to any module tab
-- [ ] Select answer for Question 1
-- [ ] Click "Check Answer"
-- [ ] Should show result WITHOUT redirect
-- [ ] State persists, no data loss
-- [ ] Try multiple questions
-- [ ] All work without issues
-
-### Test 5: Model Performance
-- [ ] Try deepseek-v3.1:671b-cloud
-- [ ] Note the speed and quality
-- [ ] Try a smaller model
-- [ ] Verify large model can be faster
-
-**All should pass!** ✅
 
 ---
 
@@ -295,7 +252,7 @@ output/
 
 ### "Tavily search not working"
 **Check:**
-1. API key is in `.env` file (not .env.template!)
+1. API key is in `.env` file
 2. Key starts with `tvly-`
 3. Selected "Advanced Search (Tavily)" in UI
 4. Entered key in sidebar input field
@@ -326,55 +283,6 @@ pip install reportlab
 - **Option A:** Use Tavily (Advanced Search) with API key
 - **Option B:** Accept lower quality with Basic Search
 
-**Tavily prevents hallucination!**
-
----
-
-## 📚 Documentation Files
-
-- **README.md** (this file) - Quick start guide
-- **ALL_5_FIXES_EXPLAINED.md** - Detailed fix explanations
-- **.env** - Configuration file (edit this!)
-
----
-
-## 🎉 Everything Works!
-
-**This version has:**
-- ✅ Proper Tavily search integration
-- ✅ Basic search alternative (free!)
-- ✅ UI search method selector
-- ✅ Fixed PDF generation
-- ✅ Working quiz buttons
-- ✅ Correct model guidance
-- ✅ Comprehensive error handling
-- ✅ Better UX overall
-
-**No more issues. Test it!** 🚀
-
----
-
-## 💡 Pro Tips
-
-### Tip 1: Choose Search Method Wisely
-- **Testing/Prototyping:** Basic Search (free)
-- **Real Use/Production:** Advanced Search (Tavily)
-
-### Tip 2: Model Selection
-- **High Quality Content:** 70B+ models
-- **Test Different Models:** Speed varies!
-- **Your Winner:** deepseek-v3.1:671b-cloud (fast + quality)
-
-### Tip 3: Session Management
-- Curriculum stays in memory until "Start Fresh"
-- Download PDF/JSON before closing browser!
-- Session persists across button clicks
-
-### Tip 4: API Key Management
-- Can enter in `.env` OR in UI sidebar
-- UI method is easier (no file editing)
-- Key is stored in session only
-
 ---
 
 ## 🎯 Next Steps
@@ -384,5 +292,3 @@ pip install reportlab
 3. **Run**: `streamlit run ui.py`
 4. **Test All Features**: Search, PDF, buttons
 5. **Enjoy**: Working system!
-
-**Read `ALL_5_FIXES_EXPLAINED.md` for technical details!**
