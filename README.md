@@ -289,7 +289,7 @@ pip install reportlab
 
 1. **Install**: `pip install -r requirements.txt`
 2. **Install ollama app if you don't have it**:
-3. **pull each models in the project to be able to use it**: by opening the terminal of the project and make this step to all models in the system and don't worry they are all cloud models 'line 201': `ollama pull model-name` and check all models you have pulled by `ollama list`
+3. **pull each models in the project to be able to use it**: by opening the terminal of the project and make this step to all models in the system and don't worry they are all cloud models 'they are at line 201 in this file': `ollama pull model-name` and check all models you have pulled by `ollama list`
 4. **Choose Search Method**: Basic (free) or Tavily (better)
 5. **Run**: `streamlit run ui.py`
 6. **Test All Features**: Search, PDF, buttons
